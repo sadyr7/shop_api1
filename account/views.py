@@ -8,7 +8,6 @@ from account.send_email import send_confirmation_email
 from account.serializers import RegisterSerializer, ActivationSerializer
 User = get_user_model()
 
-# moulvenwutyszicq
 
 class RegistrationView(APIView):
 
