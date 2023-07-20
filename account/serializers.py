@@ -49,6 +49,12 @@ class ActivationSerializer(serializers.Serializer):
             user.activation_code = ''
             user.save()
         except:
-            self.fail('неверный код')
+            raise serializers.ValidationError('неверный код')
+            # self.fail('неверный код')
 
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        exclude = ('password',)
 
