@@ -6,7 +6,7 @@ from rest_framework.views import APIView, View
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from account.send_email import send_confirmation_email
-from account.serializers import RegisterSerializer, ActivationSerializer, UserSerializer
+from account.serializers import RegisterSerializer, ActivationSerializer, UserSerializer, RegisterPhoneSerializer
 
 User = get_user_model()
 
@@ -59,4 +59,15 @@ class UserListView(ListAPIView):
     permission_classes = (permissions.IsAdminUser, )
 
 
+
+class RegistrationPhoneView(APIView):
+    def post(self, request):
+        data = request.data
+        serializer = RegisterPhoneSerializer(data = data)
+        if serializer.is_valid(raise_exception= True):
+            serializer.save()
+            return Response('Успешно зарегестрирован', status=201)
+
+
+# class ActivationPhoneView(APIView):
 
