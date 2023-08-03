@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from shopApi.tasks import send_order_notifaction_task
 from order.send_email import send_order_notifaction
 from product.models import Product
 # Create your models here.
@@ -42,7 +42,8 @@ class Order(models.Model):
 @receiver(post_save, sender=Order)
 def order_post_save(sender, instance, created, *args, **kwargs):
     if created:
-        send_order_notifaction(instance.user.email, instance.id)
+        #send_order_notifaction(instance.user.email, instance.id)
+        send_order_notifaction_task.delay(instance.user.email, instance.id)
 
 
 

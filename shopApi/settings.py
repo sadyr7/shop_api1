@@ -162,9 +162,9 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
 
-TWILIO_SID='ACdb51f22c3b8848b59a1c806a6ded61a2'
-TWILIO_AUTH_TOKEN='7f1fcb3fda9a0ec133a53f6ca422483e'
-TWILIO_SENDER_PHONE='+16678680492'
+TWILIO_SID='AC3484c5eacb24b9534481d8e88b20e55f'
+TWILIO_AUTH_TOKEN='b72a9d54f1ba44113e33457665372ce3'
+TWILIO_SENDER_PHONE='+14322958274'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"  # Optional: define the upload path for media files
 CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'  # Optional: provide the URL to jQuery
@@ -175,3 +175,14 @@ CKEDITOR_CONFIGS = {
         'width': '100%',
     },
 }
+
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = '6379'
+
+CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+#                           redis://127.0.0.1:6379/0
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
